@@ -18,7 +18,7 @@ npm i validator-csv
 To use csv-validator follow the example
 
 ```js
-const validator = require('csv-validator');
+const validator = require('validator-csv');
 const path = require("path");
 
 const filePath = path.resolve(__dirname, "uploads", "clientes.csv");
