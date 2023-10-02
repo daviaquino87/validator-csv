@@ -1,8 +1,8 @@
-const validateCsv = require("./csv-validator");
+const validateCSV = require("./csv-validator");
 const functionsValidate = require("./utils/functions-validate");
 
 const validator = {
-  validateCsv,
+  validateCSV,
   functionsValidate,
 };
 
