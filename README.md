@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/validator-csv)](https://www.npmjs.com/package/validator-csv)
 [![License](https://img.shields.io/npm/l/validator-csv)](https://github.com/daviaquino87/seu-pacote/blob/main/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/seu-usuario/seu-pacote)](https://github.com/seu-usuario/seu-pacote/issues)
+[![GitHub Issues](https://img.shields.io/github/issues/daviaquino87/validator-csv)](https://github.com/daviaquino87/validator-csv/issues)
 
 The "Validator CSV" package is a powerful and easy-to-use tool for checking the integrity and quality of CSV files. With it, you can ensure that your CSV files are well formatted, meet header specifications, and meet your application's specific requirements.
 
