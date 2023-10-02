@@ -38,6 +38,28 @@ validator.validateCSV({
 });
 ```
 
+### info:
+
+By default the separator parameter comes as "," however it can be changed.
+
+ex: 
+```js
+validator.validateCSV({
+  filePath: filePath,
+  headers: ["Nome", "Idade", "CPF"],
+  separator: ";",
+  rules: [
+    {
+      field: "CPF",
+      functionToTest: validator.functionsValidate.validateCPF,
+    },
+  ],
+}).then((data) => {
+  console.log(data);
+});
+```
+
+
 ## Validation functions
 
 Follow the example of the function below, where if it finds an error, it returns a text with the description, and if it doesn't find it, it doesn't return anything
