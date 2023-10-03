@@ -2,7 +2,7 @@ function searchIndexOfColumValidate(headers, item) {
   const index = headers.findIndex((element) => element === item);
 
   if (index == -1) {
-    throw new Error(`Não foi encontrada uma coluna referente a ${item} `);
+    throw new Error(`Column not found for the item ${item} `);
   }
 
   return index;
