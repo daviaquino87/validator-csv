@@ -1,8 +1,9 @@
 # validator-csv
 
-[![npm version](https://img.shields.io/npm/v/validator-csv)](https://www.npmjs.com/package/validator-csv)
-[![License](https://img.shields.io/npm/l/validator-csv)](https://github.com/daviaquino87/seu-pacote/blob/main/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/daviaquino87/validator-csv)](https://github.com/daviaquino87/validator-csv/issues)
+[![npm version][npm-version-image]][npm-package-uri]
+[![License][license-image]][license-uri]
+[![NPM Downloads][npm-downloads-image]][npm-downloads-url]
+[![GitHub Issues][github-issues-image]][github-issues-uri]
 
 The "Validator CSV" package is a powerful and easy-to-use tool for checking the integrity and quality of CSV files. With it, you can ensure that your CSV files are well formatted, meet header specifications, and meet your application's specific requirements.
 
@@ -109,3 +110,12 @@ The original author of validator-csv is [Davi Aquino](https://github.com/daviaqu
 
 [MIT](LICENSE.md).
 
+
+[npm-downloads-image]: https://badgen.net/npm/dm/express
+[npm-downloads-url]: https://npmcharts.com/compare/validator-csv?minimal=true
+[npm-version-image]: https://img.shields.io/npm/v/validator-csv
+[npm-package-uri]: https://www.npmjs.com/package/validator-csv
+[license-image]: https://img.shields.io/npm/l/validator-csv
+[license-uri]: https://github.com/daviaquino87/seu-pacote/blob/main/LICENSE
+[github-issues-image]: https://img.shields.io/github/issues/daviaquino87/validator-csv
+[github-issues-uri]: https://github.com/daviaquino87/validator-csv/issues
