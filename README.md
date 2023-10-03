@@ -23,19 +23,34 @@ const path = require("path");
 
 const filePath = path.resolve(__dirname, "uploads", "clientes.csv");
 
+function validateAge(age) {
+  if (age < 18) {
+    return "Invalid age, the customer must be over 18 years old.";
+  }
+}
+
 validator.validateCSV({
   filePath: filePath,
-  headers: ["Nome", "Idade", "CPF"],
+  headers: ["name", "age", "gender"],
   rules: [
     {
-      field: "CPF",
+      field: "age",
 //____________________validation functions must be informed here
-      functionToTest: validator.functionsValidate.validateCPF,
+      functionToTest: validateAge,
     },
   ],
 }).then((data) => {
   console.log(data);
 });
+
+/*
+data:{
+  headers: ["name","age","gender"],
+  rows: [
+    ["John Smith",18,"male"],
+  ]
+}
+*/
 ```
 
 ### info:
@@ -72,6 +87,23 @@ function validateCPF(cpf) {
 }
 ```
 
+## Examples
+
+To view the examples, clone the Express repo and install the dependencies:
+
+```sh
+$ git clone --branch examples https://github.com/daviaquino87/validator-csv 
+
+$ cd validator-csv/examples
+
+$ npm install
+
+$ npm run start
+```
+
+# People
+
+The original author of validator-csv is [Davi Aquino](https://github.com/daviaquino87).
 
 ## Licença
 
