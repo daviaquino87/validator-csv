@@ -15,7 +15,7 @@ npm i validator-csv
 ```
 
 ## Usage
-To use csv-validator follow the example
+To use validator-csv follow the example
 
 ```js
 const validator = require('validator-csv');
