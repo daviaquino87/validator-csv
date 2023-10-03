@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example Table</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      header {
+        background-color: #333;
+        color: white;
+        padding: 8px;
+      }
+
+      table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+
+      th {
+        background-color: #333;
+        color: white;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #f2f2f2;
+      }
+
+      tr.error-row {
+        background-color: #c94d44;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Example Table</h1>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <% for (let header of headers) { %> <% if (header !== 'mark') { %>
+            <th><%= header %></th>
+            <% } %> <% } %>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let row of rows) { %>
+          <tr class="<%= row.mark ? 'error-row' : '' %>">
+            <td><%= row.name %></td>
+            <td><%= row.age %></td>
+            <td><%= row.gender %></td>
+            <td><%= row.error %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>
