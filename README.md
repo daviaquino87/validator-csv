@@ -46,9 +46,9 @@ validator.validateCSV({
 
 /*
 data:{
-  headers: ["name","age","gender"],
+  headers: ["name","age","gender","mark","erros"],
   rows: [
-    ["John Smith",18,"male"],
+    ["John Smith",18,"male",false,[]],
   ]
 }
 */
@@ -56,7 +56,11 @@ data:{
 
 ### info:
 
-By default the separator parameter comes as "," however it can be changed.
+By default, the separator parameter is set to a comma (","), but this setting can be modified by the user as needed.
+
+Important Note About the Escape Character
+
+When the text is encapsulated in double quotes ("), the separator will not impact the lines, thus ensuring the integrity of the data contained in the quotes.
 
 ex: 
 ```js
