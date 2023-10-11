@@ -1,6 +1,6 @@
 {
   "name": "validator-csv",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "The 'Validator CSV' package is a powerful and easy-to-use tool for checking the integrity and quality of CSV files. With it, you can ensure that your CSV files are well formatted, meet header specifications, and meet your application's specific requirements.",
   "main": "src/index.js",
   "keywords": [

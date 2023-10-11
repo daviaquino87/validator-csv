@@ -1,4 +1,6 @@
 const fs = require("fs");
+const readline = require("readline");
+const REGEX_WORD_WITH_SCAPE = /"([^"]+)"/g;
 
 /**
  *
@@ -8,47 +10,45 @@ const fs = require("fs");
 
 function searchFileAndRemoveInformation({ filePath, separator }) {
   return new Promise((resolve, reject) => {
-    fs.access(filePath, fs.constants.F_OK, (err) => {
-      if (err) {
-        reject("file not found.");
+    const fileStream = fs.createReadStream(filePath, { encoding: "utf8" });
+
+    const rl = readline.createInterface({
+      input: fileStream,
+      crlfDelay: Infinity,
+    });
+
+    let isFirstLine = true;
+    let headers = [];
+    let rows = [];
+
+    rl.on("line", (line) => {
+      if (isFirstLine) {
+        headers = line.split(separator);
+        isFirstLine = false;
       } else {
-        fs.readFile(filePath, "utf8", (err, data) => {
-          if (err) {
-            reject("error to read file:" + err);
-          } else {
-            const newArray = data.split("\r\n");
+        const rowSplitted = line
+          .replace(REGEX_WORD_WITH_SCAPE, (_, group) => {
+            return group.replace(/,/g, "scape@scape");
+          })
+          .split(separator);
 
-            const headers = newArray[0].split(separator);
-            const rows = [];
-
-            newArray.splice(1).forEach((element) => {
-              let isEscape = false;
-              let row = [];
-              let currentItem = "";
-
-              for (let i = 0; i < element.length; i++) {
-                if (element[i] === '"') {
-                  isEscape = !isEscape;
-                } else if (element[i] === separator && !isEscape) {
-                  row.push(currentItem);
-                  currentItem = "";
-                } else {
-                  currentItem += element[i];
-                }
-              }
-
-              row.push(currentItem);
-
-              rows.push(row);
-            });
-
-            resolve({
-              headers,
-              rows,
-            });
-          }
+        const rowWithReplaceBack = rowSplitted.map((item) => {
+          return item.trim().replace(/scape@scape/g, separator);
         });
+
+        rows.push(rowWithReplaceBack);
       }
+    });
+
+    rl.on("close", () => {
+      resolve({
+        headers,
+        rows,
+      });
+    });
+
+    fileStream.on("error", (err) => {
+      reject("Error reading file: " + err);
     });
   });
 }
