@@ -21,7 +21,7 @@ function searchFileAndRemoveInformation({ filePath, separator }) {
             const headers = newArray[0].split(separator);
             const rows = [];
 
-            newArray.forEach((element) => {
+            newArray.splice(0).forEach((element) => {
               let isEscape = false;
               let row = [];
               let currentItem = "";
