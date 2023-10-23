@@ -87,7 +87,7 @@ To view the examples, clone the Express repo and install the dependencies:
 ```sh
 $ git clone --branch examples https://github.com/daviaquino87/validator-csv 
 
-$ cd validator-csv/examples
+$ cd validator-csv
 
 $ npm install
 
