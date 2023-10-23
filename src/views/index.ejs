@@ -58,7 +58,7 @@
         </thead>
         <tbody>
           <% for (let row of rows) { %>
-          <tr class="<%= row.mark ? 'error-row' : '' %>">
+          <tr class="<%= row.error.length > 0 ? 'error-row' : '' %>">
             <td><%= row.name %></td>
             <td><%= row.age %></td>
             <td><%= row.gender %></td>
