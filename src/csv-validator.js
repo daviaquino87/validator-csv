@@ -7,10 +7,10 @@ const areEqualArrays = require("./utils/are-equal-arrays");
  * @param {Object.access} filePath - The path to the csv file
  * @param {string[]} headers - The CSV header
  * @param {string} separator - The CSV separator caracter
- * @param {object[]} rules - The set of rules to be applied on the line
+ * @param {object[]} schema - The schema to be applied on the line
  */
 
-async function validateCSV({ filePath, headers, separator = ",", rules }) {
+async function validateCSV({ filePath, headers, separator = ",", schema }) {
   const fileData = await searchFileAndRemoveInformation({
     filePath: filePath,
     separator: separator,
@@ -22,15 +22,13 @@ async function validateCSV({ filePath, headers, separator = ",", rules }) {
     throw new Error("invalid csv");
   }
 
-  fileData.headers.push("mark", "error");
+  fileData.headers.push("error");
 
-  await Promise.all(
-    fileData.rows.map(async (row) => {
-      const data = await validateRowsByRule(row, rules, fileData.headers);
-      row.push(data.mark, data.errors);
-      rows.push(row);
-    })
-  );
+  for (const row of Object.values(fileData.rows)) {
+    const data = await validateRowsByRule({ row, schema, headers: fileData.headers });
+    row.push(data.errors);
+    rows.push(row);
+  }
 
   return {
     headers: fileData.headers,

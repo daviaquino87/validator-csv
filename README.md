@@ -20,35 +20,28 @@ To use validator-csv follow the example
 
 ```js
 const validator = require('validator-csv');
-const path = require("path");
+const Yup = require("yup");
+const path = require("node:path");
 
 const filePath = path.resolve(__dirname, "uploads", "clientes.csv");
 
-function validateAge(age) {
-  if (age < 18) {
-    return "Invalid age, the customer must be over 18 years old.";
-  }
-}
+const validationSchema = Yup.object().shape({
+  age: Yup.number().min(18, "Invalid age, the customer must be over 18 years old.").required("The field age is required."),
+});
 
 validator.validateCSV({
   filePath: filePath,
   headers: ["name", "age", "gender"],
-  rules: [
-    {
-      field: "age",
-//____________________validation functions must be informed here
-      functionToTest: validateAge,
-    },
-  ],
+  schema: validationSchema,
 }).then((data) => {
   console.log(data);
 });
 
 /*
 data:{
-  headers: ["name","age","gender","mark","erros"],
+  headers: ["name","age","gender","erros"],
   rows: [
-    ["John Smith",18,"male",false,[]],
+    ["John Smith",18,"male",[]],
   ]
 }
 */
@@ -66,14 +59,9 @@ ex:
 ```js
 validator.validateCSV({
   filePath: filePath,
-  headers: ["Nome", "Idade", "CPF"],
+  headers: ["name", "age", "gender"],
   separator: ";",
-  rules: [
-    {
-      field: "CPF",
-      functionToTest: validator.functionsValidate.validateCPF,
-    },
-  ],
+  schema: validationSchema,
 }).then((data) => {
   console.log(data);
 });
@@ -82,14 +70,14 @@ validator.validateCSV({
 
 ## Validation functions
 
-Follow the example of the function below, where if it finds an error, it returns a text with the description, and if it doesn't find it, it doesn't return anything
+Example of custom function with yup
 
 ```js
-function validateCPF(cpf) {
-  if (!isCPF(cpf)) {
-    return "The CPF entered is invalid";
-  }
-}
+const validationSchema = Yup.object().shape({
+  age: Yup.number().test("validate-age","Invalid age, the customer must be over 18 years old.",(element) => {
+    element >= 18
+  })
+});
 ```
 
 ## Examples

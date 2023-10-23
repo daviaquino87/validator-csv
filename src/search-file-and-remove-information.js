@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("node:fs");
 const readline = require("readline");
 const REGEX_WORD_WITH_SCAPE = /"([^"]+)"/g;
 
