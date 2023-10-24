@@ -16,12 +16,17 @@ npm i validator-csv
 ```
 
 ## Usage
-To use validator-csv follow the example
+To use validator-csv follow the examples:
+<br>
+<br>
+<br>
 
+Validating CSV through file path
 ```js
+const path = require("node:path");
+
 const validator = require('validator-csv');
 const Yup = require("yup");
-const path = require("node:path");
 
 const filePath = path.resolve(__dirname, "uploads", "clientes.csv");
 
@@ -30,12 +35,56 @@ const validationSchema = Yup.object().shape({
 });
 
 validator.validateCSV({
-  filePath: filePath,
+  filePath,
   headers: ["name", "age", "gender"],
   schema: validationSchema,
 }).then((data) => {
   console.log(data);
+}).catch((error) => {
+  console.error("Error:", error);
 });
+
+
+/*
+data:{
+  headers: ["name","age","gender","erros"],
+  rows: [
+    ["John Smith",18,"male",[]],
+  ]
+}
+*/
+```
+<br>
+<br>
+
+Validating CSV through buffer
+```js
+const fs = require("node:fs");
+const path = require("node:path");
+
+const validator = require('validator-csv');
+const Yup = require("yup");
+
+const filePath = path.join(__dirname, "uploads", "clientes.csv");
+const csvBuffer = fs.readFileSync(filePath);
+
+const validationSchema = Yup.object().shape({
+  age: Yup.number().min(18, "Invalid age, the customer must be over 18 years old.").required("The field age is required."),
+});
+
+validator
+  .validateCSVFromBuffer({
+    buffer: csvBuffer,
+    headers: ["name", "age", "gender"],
+    schema: validationSchema,
+  })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
 
 /*
 data:{

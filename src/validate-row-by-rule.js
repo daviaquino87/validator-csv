@@ -1,5 +1,3 @@
-const Yup = require("yup");
-
 function searchIndexOfColumValidate(headers, item) {
   const index = headers.findIndex((element) => element === item);
 
